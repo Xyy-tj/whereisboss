@@ -25,8 +25,8 @@ body {
 .app-container {
     display: flex;
     height: 100vh;
-    padding: 1.5rem;
-    gap: 1.5rem;
+    padding: 1.75rem;
+    gap: 2rem;
     box-sizing: border-box;
 }
 
@@ -34,7 +34,6 @@ body {
     background: var(--bg-color);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    padding: 2rem;
 }
 
 .main-panel {
@@ -42,6 +41,7 @@ body {
     min-width: 0;
     display: flex;
     flex-direction: column;
+    padding: 2rem;
 }
 
 #calendar-container {
@@ -49,16 +49,20 @@ body {
 }
 
 .side-panel {
-    width: 380px;
+    width: 420px;
     flex-shrink: 0;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
 }
 
-.main-title, .input-section h2 {
+.main-title, .input-section h2, .status-712-section h2 {
     text-align: center;
     color: #2c3e50;
-    margin-top: 0;
+    margin: 0 0 1.25rem;
     font-weight: 600;
+    font-size: 1.35rem;
 }
 
 .main-title {
@@ -68,21 +72,21 @@ body {
 .input-section {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    flex: 1;
 }
 
 .input-section p {
     text-align: center;
     font-size: 0.9rem;
     color: var(--text-color-light);
-    margin-bottom: 1.5rem;
+    margin: 0 0 1rem;
 }
 
 .button-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 button {
@@ -90,12 +94,14 @@ button {
     background-color: var(--bg-color);
     color: var(--primary-color);
     font-weight: 500;
-    padding: 0.75rem 1rem;
+    padding: 0.625rem 1rem;
     border-radius: var(--border-radius);
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     transition: all 0.2s;
     margin: 0;
+    height: 40px;
+    line-height: 1;
 }
 
 button:hover {
@@ -109,8 +115,9 @@ button:hover {
     color: var(--bg-color);
     border-color: var(--success-color);
     font-weight: 600;
-    font-size: 1rem;
-    margin-top: auto; /* Push submit button to the bottom */
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    height: 44px;
 }
 
 #btn-submit:hover {
@@ -126,19 +133,29 @@ button:hover {
 
 input[type="text"], input[type="datetime-local"] {
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: 0.625rem 1rem;
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
     box-sizing: border-box;
     transition: border-color 0.2s, box-shadow 0.2s;
+    height: 40px;
 }
 
 input[type="text"]:focus, input[type="datetime-local"]:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+/* 重置时间输入框的特定样式 */
+input[type="datetime-local"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    padding: 0.625rem 0.75rem;
 }
 
 .time-inputs {
@@ -153,11 +170,16 @@ input[type="text"]:focus, input[type="datetime-local"]:focus {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    margin: 0;
+}
+
+.time-inputs input[type="datetime-local"] {
+    margin-bottom: 0;
 }
 
 .time-inputs label {
-    margin-bottom: 0.5rem;
-    font-size: 0.85rem;
+    margin-bottom: 0.375rem;
+    font-size: 0.9rem;
     color: var(--text-color-light);
     font-weight: 500;
 }
@@ -185,18 +207,16 @@ input[type="text"]:focus, input[type="datetime-local"]:focus {
 .divider {
     border: none;
     border-top: 1px solid var(--border-color);
-    margin: 2rem 0;
+    margin: 1.5rem 0;
 }
 
-.status-712-section h2 {
-    text-align: center;
-    margin-top: 0;
-    font-weight: 600;
+.status-712-section {
+    margin-bottom: 0.75rem;
 }
 
 .status-712-display {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     padding: 1rem;
     border-radius: var(--border-radius);
     background-color: var(--light-bg-color);
@@ -207,7 +227,7 @@ input[type="text"]:focus, input[type="datetime-local"]:focus {
     font-size: 1.5rem;
     font-weight: 700;
     display: block;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.375rem;
 }
 
 #status-712-text.status-in { color: #27ae60; }
@@ -224,4 +244,123 @@ input[type="text"]:focus, input[type="datetime-local"]:focus {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0.75rem;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+    .app-container {
+        display: block;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .main-panel, .side-panel {
+        width: 100%;
+        margin-bottom: 1rem;
+        box-sizing: border-box;
+    }
+
+    .main-panel {
+        min-height: 500px;
+    }
+
+    #calendar-container {
+        height: 500px !important;
+    }
+
+    .side-panel {
+        overflow-y: visible;
+        margin-bottom: 0;
+    }
+
+    .button-group {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+
+    .time-inputs {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .main-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .input-section h2 {
+        font-size: 1.2rem;
+    }
+
+    input[type="text"], 
+    input[type="datetime-local"] {
+        font-size: 16px; /* 防止iOS自动缩放 */
+        padding: 0.6rem 0.8rem;
+    }
+
+    .status-712-actions {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    /* FullCalendar 移动端优化 */
+    .fc .fc-toolbar {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 1.2rem;
+    }
+
+    .fc .fc-button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 小屏幕设备的额外优化 */
+@media screen and (max-width: 480px) {
+    .app-container {
+        padding: 0.5rem;
+    }
+
+    .main-panel, .side-panel {
+        padding: 0.8rem;
+    }
+
+    .button-group {
+        grid-template-columns: 1fr;
+    }
+
+    .status-712-actions {
+        grid-template-columns: 1fr;
+    }
+
+    #status-712-text {
+        font-size: 1.2rem;
+    }
+
+    /* 超小屏幕的日历优化 */
+    .fc .fc-toolbar-title {
+        font-size: 1rem;
+    }
+
+    .fc .fc-button {
+        padding: 0.3em 0.5em;
+        font-size: 0.8rem;
+    }
+
+    .fc .fc-daygrid-day-number {
+        font-size: 0.9em;
+    }
+
+    .fc .fc-daygrid-day-frame {
+        min-height: 3.5em;
+    }
+
+    /* 隐藏不重要的元素 */
+    .fc .fc-timegrid-axis-cushion,
+    .fc .fc-timegrid-slot-label-cushion {
+        font-size: 0.7em;
+    }
 } 

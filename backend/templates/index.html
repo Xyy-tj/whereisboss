@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>老板在哪儿？</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='favicon.ico') }}">
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,30 +21,31 @@
 <body>
     <div class="app-container">
         <div class="main-panel">
-            <h1 class="main-title">老板在哪儿?</h1>
+            <h1 class="main-title">Where is the Boss?</h1>
             <div id="calendar-container">
                  <!-- FullCalendar will be rendered here -->
             </div>
         </div>
         <div class="side-panel">
             <div class="status-712-section">
-                <h2>老板在712吗?</h2>
+                <h2>Is the Boss in your seat?</h2>
                 <div class="status-712-display">
                     <span id="status-712-text">正在查询...</span>
                     <small id="status-712-time"></small>
                 </div>
                 <div class="status-712-actions">
-                    <button class="status-btn" data-status="在">在</button>
-                    <button class="status-btn" data-status="不在">不在</button>
-                    <button class="status-btn" data-status="背包走了">背包走了</button>
+                    <link rel="icon" href="favicon.ico" type="image/x-icon">
+                    <button class="status-btn" data-status="在">在😨</button>
+                    <button class="status-btn" data-status="不在">不在😄</button>
+                    <button class="status-btn" data-status="背包走了">背包走了🤩</button>
                 </div>
             </div>
             <hr class="divider">
             <div class="input-section">
                 <h2>更新老板行程</h2>
-                <p>选择一个预设地点或手动输入</p>
+                <!-- <p>选择一个预设地点或手动输入</p> -->
                 <div class="button-group">
-                    <button class="preset-btn">科技园712</button>
+                    <button class="preset-btn">办公室</button>
                     <button class="preset-btn">无锡</button>
                     <button class="preset-btn">深圳</button>
                     <button class="preset-btn">北京</button>

@@ -4,8 +4,11 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 import datetime
+import asyncio
+import json
+from starlette.responses import StreamingResponse
 
 app = FastAPI()
 
@@ -26,6 +29,23 @@ class EventTimeUpdate(BaseModel):
 
 class Status712Update(BaseModel):
     status: str
+
+# Broadcaster to handle SSE connections
+class Broadcaster:
+    def __init__(self):
+        self.connections: List[asyncio.Queue] = []
+
+    async def connect(self, queue: asyncio.Queue):
+        self.connections.append(queue)
+
+    def disconnect(self, queue: asyncio.Queue):
+        self.connections.remove(queue)
+
+    async def broadcast(self, msg: str):
+        for queue in self.connections:
+            await queue.put(msg)
+
+broadcaster = Broadcaster()
 
 async def init_db():
     async with aiosqlite.connect(DATABASE) as db:
@@ -65,6 +85,25 @@ async def startup():
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+@app.get("/api/events")
+async def sse_endpoint(request: Request):
+    queue = asyncio.Queue()
+
+    async def event_generator():
+        try:
+            await broadcaster.connect(queue)
+            while True:
+                message = await queue.get()
+                if await request.is_disconnected():
+                    break
+                yield f"data: {message}\n\n"
+        except asyncio.CancelledError:
+            pass
+        finally:
+            broadcaster.disconnect(queue)
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
 @app.get("/api/status")
 async def get_status():
     async with aiosqlite.connect(DATABASE) as db:
@@ -103,6 +142,14 @@ async def update_status_712(status_update: Status712Update):
     async with aiosqlite.connect(DATABASE) as db:
         await db.execute('INSERT INTO status_712 (status) VALUES (?)', (status_update.status,))
         await db.commit()
+        # Fetch the latest status to broadcast
+        db.row_factory = aiosqlite.Row
+        async with db.execute('SELECT status, created_at FROM status_712 ORDER BY created_at DESC LIMIT 1') as cursor:
+            latest_status = await cursor.fetchone()
+    
+    if latest_status:
+        await broadcaster.broadcast(json.dumps(dict(latest_status)))
+
     return JSONResponse(content={'success': True})
 
 @app.post("/api/update")
