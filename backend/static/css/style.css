@@ -1,0 +1,227 @@
+:root {
+    --primary-color: #4a90e2;
+    --primary-hover-color: #357ABD;
+    --success-color: #50e3c2;
+    --success-hover-color: #38a892;
+    --danger-color: #e74c3c;
+    --danger-hover-color: #c0392b;
+    --light-bg-color: #f7f9fc;
+    --bg-color: #ffffff;
+    --text-color: #333;
+    --text-color-light: #555;
+    --border-color: #e0e6ed;
+    --border-radius: 8px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --font-family: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--light-bg-color);
+    color: var(--text-color);
+    margin: 0;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    box-sizing: border-box;
+}
+
+.main-panel, .side-panel {
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+}
+
+.main-panel {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#calendar-container {
+    flex: 1;
+}
+
+.side-panel {
+    width: 380px;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+.main-title, .input-section h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.main-title {
+    margin-bottom: 1.5rem;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.input-section p {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+    margin-bottom: 1.5rem;
+}
+
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+button {
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    margin: 0;
+}
+
+button:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border-color: var(--primary-color);
+}
+
+#btn-submit {
+    background-color: var(--success-color);
+    color: var(--bg-color);
+    border-color: var(--success-color);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: auto; /* Push submit button to the bottom */
+}
+
+#btn-submit:hover {
+    background-color: var(--success-hover-color);
+    border-color: var(--success-hover-color);
+}
+
+#btn-submit:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    border-color: #bdc3c7;
+}
+
+input[type="text"], input[type="datetime-local"] {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus, input[type="datetime-local"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.time-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.time-inputs div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.time-inputs label {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-color-light);
+    font-weight: 500;
+}
+
+.fc-event-conflict {
+    background-color: var(--danger-color) !important;
+    border-color: var(--danger-hover-color) !important;
+}
+
+/* Make FullCalendar's UI match our theme */
+.fc .fc-button-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.fc .fc-button-primary:hover {
+    background-color: var(--primary-hover-color);
+    border-color: var(--primary-hover-color);
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: rgba(74, 144, 226, 0.1);
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 2rem 0;
+}
+
+.status-712-section h2 {
+    text-align: center;
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.status-712-display {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--light-bg-color);
+    border: 1px solid var(--border-color);
+}
+
+#status-712-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+#status-712-text.status-in { color: #27ae60; }
+#status-712-text.status-out { color: #f39c12; }
+#status-712-text.status-gone { color: #95a5a6; }
+#status-712-text.status-unknown { color: var(--text-color-light); }
+
+#status-712-time {
+    font-size: 0.8rem;
+    color: var(--text-color-light);
+}
+
+.status-712-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+} 

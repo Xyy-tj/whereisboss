@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老板在哪儿？</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+    <!-- FullCalendar JS -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <!-- Toastify JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="main-panel">
+            <h1 class="main-title">老板在哪儿?</h1>
+            <div id="calendar-container">
+                 <!-- FullCalendar will be rendered here -->
+            </div>
+        </div>
+        <div class="side-panel">
+            <div class="status-712-section">
+                <h2>老板在712吗?</h2>
+                <div class="status-712-display">
+                    <span id="status-712-text">正在查询...</span>
+                    <small id="status-712-time"></small>
+                </div>
+                <div class="status-712-actions">
+                    <button class="status-btn" data-status="在">在</button>
+                    <button class="status-btn" data-status="不在">不在</button>
+                    <button class="status-btn" data-status="背包走了">背包走了</button>
+                </div>
+            </div>
+            <hr class="divider">
+            <div class="input-section">
+                <h2>更新老板行程</h2>
+                <p>选择一个预设地点或手动输入</p>
+                <div class="button-group">
+                    <button class="preset-btn">科技园712</button>
+                    <button class="preset-btn">无锡</button>
+                    <button class="preset-btn">深圳</button>
+                    <button class="preset-btn">北京</button>
+                </div>
+                <input type="text" id="location-input" placeholder="手动输入地点..."/>
+                <input type="text" id="info-source-input" placeholder="信息来源 (例如：听说的)"/>
+                <div class="time-inputs">
+                    <div>
+                        <label for="start-time">开始时间:</label>
+                        <input type="datetime-local" id="start-time">
+                    </div>
+                    <div>
+                        <label for="end-time">结束时间:</label>
+                        <input type="datetime-local" id="end-time">
+                    </div>
+                </div>
+                <button id="btn-submit">提交</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', path='js/main.js') }}"></script>
+</body>
+</html> 
